@@ -80,4 +80,10 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     cache-enabled: true
-
+# application.yml
+undertow:
+  websocket:
+    buffer-size: 1024
+    region-buffers: 100
+    max-idle-buffers: 20
+    max-direct-memory: 10485760

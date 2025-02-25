@@ -42,7 +42,7 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public SaResult login(@RequestParam String account, @RequestParam String password, HttpServletRequest request) {
-       return userService.login(account, password, request.getHeader("User-Agent"));
+       return userService.login(account, password, request.getHeader("Sec-Ch-Ua-Platform"));
 
     }
     @GetMapping(value = "/logout")
