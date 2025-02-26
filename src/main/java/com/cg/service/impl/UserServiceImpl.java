@@ -3,7 +3,7 @@ package com.cg.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cg.entity.ResponsePOJO.RUser;
@@ -44,8 +44,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return SaResult.error("账号不存在");
         }else {
             if (encoder.matches(password,vUser.getPassword())) {
-                LambdaQueryWrapper<VRole> wrapper1 = new LambdaQueryWrapper<>();
-                wrapper1.eq(VRole::getRoleId,vUser.getRoleId());
+                QueryWrapper<VRole> wrapper1 = new QueryWrapper<>();
+                wrapper1.eq("role_id", vUser.getRoleId()).eq("status", 1).eq("role_status", 1);
                 List<VRole> list = vRoleService.list(wrapper1);
                 List<String> resourceList =list.stream().map(VRole::getResValue).toList();
                 StpUtil.login(vUser.getId());
